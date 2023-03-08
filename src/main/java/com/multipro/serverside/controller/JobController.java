@@ -2,12 +2,7 @@ package com.multipro.serverside.controller;
 
 import com.multipro.serverside.client.JobClient;
 import com.multipro.serverside.dto.JobDto;
-import com.opencsv.CSVWriter;
-import com.opencsv.exceptions.CsvDataTypeMismatchException;
-import com.opencsv.exceptions.CsvRequiredFieldEmptyException;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
@@ -15,7 +10,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.UUID;
 
-@Controller
+@RestController
 @RequestMapping("/serverside")
 @RequiredArgsConstructor
 public class JobController {

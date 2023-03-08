@@ -48,7 +48,7 @@ public class AuthenticationService {
     }
 
     public AccountDto validateLogin(Account account){
-        Account accounts = accountRepository.findAccountByUsername(account.getUsername());
+        Account accounts = accountRepository.findFirstByUsername(account.getUsername());
         if (accounts == null){
             throw new ResponseStatusException(HttpStatus.UNAUTHORIZED);
         }else{
@@ -65,7 +65,7 @@ public class AuthenticationService {
                 throw new ResponseStatusException(HttpStatus.UNAUTHORIZED);
             } else {
                 Claims claims = jwtService.getAllClaimsFromToken(token);
-                Account account = accountRepository.findAccountByUsername(claims.get(USERNAME, String.class));
+                Account account = accountRepository.findFirstByUsername(claims.get(USERNAME, String.class));
                 if (account == null) {
                     throw new ResponseStatusException(HttpStatus.UNAUTHORIZED);
                 }
