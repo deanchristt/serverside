@@ -47,6 +47,18 @@ public class AuthenticationService {
         return accountDto;
     }
 
+    public AccountDto validateLogin(Account account){
+        Account accounts = accountRepository.findAccountByUsername(account.getUsername());
+        if (accounts == null){
+            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED);
+        }else{
+            AccountDto accountDto = mapperFacade.map(account, AccountDto.class);
+            accountDto.setAccessToken(jwtService.generateToken(account.getUsername()));
+            return accountDto;
+        }
+
+    }
+
     public void validateToken(String token){
         try {
             if (jwtService.isTokenExpired(token)) {

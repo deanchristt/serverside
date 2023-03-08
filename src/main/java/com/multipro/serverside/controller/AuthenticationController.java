@@ -4,6 +4,7 @@ import com.multipro.serverside.dto.AccountDto;
 import com.multipro.serverside.entity.Account;
 import com.multipro.serverside.service.AuthenticationService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -28,5 +29,11 @@ public class AuthenticationController {
     @PostMapping("/accounts")
     public AccountDto createAccount(@RequestBody Account account){
         return authenticationService.createAccount(account);
+    }
+
+    @PostMapping("/login")
+    public ResponseEntity<AccountDto> login(@RequestBody Account account){
+        return ResponseEntity.ok()
+                .body(authenticationService.validateLogin(account));
     }
 }
