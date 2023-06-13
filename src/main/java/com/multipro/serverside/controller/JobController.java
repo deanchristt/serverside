@@ -7,7 +7,8 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.List;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.UUID;
 
 @RestController
@@ -18,7 +19,7 @@ public class JobController {
     private final JobClient jobClient;
 
     @GetMapping("/jobs")
-    public List<JobDto> getAllJob(@RequestHeader("token") String token){
+    public HashMap<String, ArrayList<JobDto>> getAllJob(@RequestHeader("token") String token){
         return jobClient.getData(token);
     }
 
