@@ -29,7 +29,7 @@ public class JobClient {
     private String jobsUrlById;
 
 
-    public HashMap<String, ArrayList<JobDto>> getData(String token) {
+    public HashMap<String, ArrayList<JobDto>> getData() {
         HashMap<String, ArrayList<JobDto>> map = new HashMap<>();
         JobDto[] data = restTemplate.getForObject(jobsUrl, JobDto[].class);
 

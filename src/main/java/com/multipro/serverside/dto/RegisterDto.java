@@ -3,8 +3,7 @@ package com.multipro.serverside.dto;
 import lombok.Data;
 
 @Data
-public class AccountDto {
-
+public class RegisterDto {
     private String username;
-    private String accessToken;
+    private String password;
 }

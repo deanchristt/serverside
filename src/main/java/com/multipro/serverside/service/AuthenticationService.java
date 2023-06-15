@@ -1,6 +1,7 @@
 package com.multipro.serverside.service;
 
 import com.multipro.serverside.dto.AccountDto;
+import com.multipro.serverside.dto.RegisterDto;
 import com.multipro.serverside.entity.Account;
 import com.multipro.serverside.repository.AccountRepository;
 import io.jsonwebtoken.Claims;
@@ -29,18 +30,8 @@ public class AuthenticationService {
 
     private final String USERNAME = "username";
 
-
-    public List<Account> getAllAccount(){
-        return accountRepository.findAll();
-    }
-
-    public AccountDto getAccountById(Long id){
-        Account account = accountRepository.findById(id).orElseThrow();
-        AccountDto accountDto=  mapperFacade.map(account, AccountDto.class);
-        return accountDto;
-    }
-
-    public AccountDto createAccount(Account account){
+    public AccountDto createAccount(RegisterDto registerDto){
+        Account account = mapperFacade.map(registerDto, Account.class);
         accountRepository.save(account);
         AccountDto accountDto=  mapperFacade.map(account, AccountDto.class);
         accountDto.setAccessToken(jwtService.generateToken(accountDto.getUsername()));
